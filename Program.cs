@@ -1,4 +1,9 @@
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+using SallesWebApp.Data;
 var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddDbContext<SallesWebAppContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("SallesWebAppContext") ?? throw new InvalidOperationException("Connection string 'SallesWebAppContext' not found.")));
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
